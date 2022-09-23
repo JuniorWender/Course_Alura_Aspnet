@@ -8,12 +8,21 @@ namespace FilmesAPI.Controllers
     public class MovieController : ControllerBase
     {
         private static List<Movie> movies = new List<Movie>();
+        private static int id = 1;
 
         [HttpPost] // Used for add a new data on RESTful application
-        public void AddMovie(Movie movie)
+        public void AddMovie([FromBody]Movie movie)
         {
+            movie.Id = id++;
             movies.Add(movie);
-            Console.WriteLine(movie.Title);
         }
+
+        [HttpGet]
+        public IEnumerable<Movie> GetAllMovies()
+        {
+            return movies;
+        }
+
+        // public GetMovie()
     }
 }
