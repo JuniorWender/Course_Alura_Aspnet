@@ -11,18 +11,29 @@ namespace FilmesAPI.Controllers
         private static int id = 1;
 
         [HttpPost] // Used for add a new data on RESTful application
-        public void AddMovie([FromBody]Movie movie)
+        public IActionResult AddMovie([FromBody]Movie movie)
         {
             movie.Id = id++;
             movies.Add(movie);
+            return CreatedAtAction(nameof(GetMovie), new { Id = movie.Id }, movie);
         }
 
         [HttpGet]
-        public IEnumerable<Movie> GetAllMovies()
+        public IActionResult GetAllMovies()
         {
-            return movies;
+            return Ok(movies);
         }
 
-        // public GetMovie()
+        [HttpGet("{id}")]
+        public IActionResult GetMovie(int id)
+        {
+            Movie movie = movies.FirstOrDefault(movie => movie.Id == id);
+
+            if (movie != null)
+            {
+                return Ok(movie);
+            }
+            return NotFound();
+        }
     }
 }
