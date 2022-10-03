@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MoviesAPI.Models
+namespace MoviesAPI.Migrations.Dtos
 {
-    public class Movie
+    public class ReadMovieDto
     {
         [Key]
         [Required]
@@ -17,8 +17,9 @@ namespace MoviesAPI.Models
         [StringLength(30, ErrorMessage = "Category length invalid")]
         public string Category { get; set; }
 
-        [Range(1, 600,ErrorMessage = "The Duration Range invalid")]
+        [Range(1, 600, ErrorMessage = "The Duration Range invalid")]
         public int Duration { get; set; }
-        
+
+        public DateTime SearchHour { get; set; }
     }
 }

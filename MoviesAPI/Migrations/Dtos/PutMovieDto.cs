@@ -1,13 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MoviesAPI.Models
+namespace MoviesAPI.Migrations.Dtos
 {
-    public class Movie
+    public class PutMovieDto
     {
-        [Key]
-        [Required]
-        public int Id { get; set; }
-
         [Required(ErrorMessage = "The Title field is required")]
         public string Title { get; set; }
 
@@ -17,8 +13,7 @@ namespace MoviesAPI.Models
         [StringLength(30, ErrorMessage = "Category length invalid")]
         public string Category { get; set; }
 
-        [Range(1, 600,ErrorMessage = "The Duration Range invalid")]
+        [Range(1, 600, ErrorMessage = "The Duration Range invalid")]
         public int Duration { get; set; }
-        
     }
 }

@@ -1,5 +1,6 @@
-﻿using FilmesAPI.Models;
+﻿using MoviesAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using MoviesAPI.Migrations.Dtos;
 
 namespace MoviesAPI.Data
 {
@@ -7,6 +8,6 @@ namespace MoviesAPI.Data
     {
         public MovieContext(DbContextOptions<MovieContext> opt) : base(opt) { }
 
-        public DbSet<CreateMovieDto> Movies {get; set;}
+        public DbSet<Movie> Movies {get; set;}
     }
 }
