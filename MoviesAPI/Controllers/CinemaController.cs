@@ -31,7 +31,7 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Cinema> GetCinemas([FromQuery] string movieName)
+        public IEnumerable<Cinema> GetAllCinemas([FromQuery] string movieName)
         {
             return _context.Cinemas;
         }
@@ -49,7 +49,7 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult PutCinema(int id, [FromBody] UpdateCinemaDto cinemaDto)
+        public IActionResult PutCinema(int id, [FromBody] PutCinemaDto cinemaDto)
         {
             Cinema cinema = _context.Cinemas.FirstOrDefault(cinema => cinema.Id == id);
             if (cinema == null)

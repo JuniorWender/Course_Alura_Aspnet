@@ -2,7 +2,7 @@
 
 namespace MoviesAPI.Data.Dtos.Cinema
 {
-    public class UpdateCinemaDto
+    public class PutCinemaDto
     {
         [Required(ErrorMessage = "The Name field is required")]
         public string Name { get; set; }

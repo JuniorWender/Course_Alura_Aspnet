@@ -1,15 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MoviesAPI.Models
+namespace MoviesAPI.Data.Dtos.Location
 {
-    public class Location
+    public class PutLocationDto
     {
-        [Key]
-        [Required]
-        public int Id { get; set; }
         public string Street { get; set; }
         public string district { get; set; }
         public int Number { get; set; }
-        public Cinema Cinema { get; set; }
     }
 }

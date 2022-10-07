@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using MoviesAPI.Models;
 
 namespace MoviesAPI.Data.Dtos.Cinema
 {
@@ -10,8 +11,5 @@ namespace MoviesAPI.Data.Dtos.Cinema
 
         [Required(ErrorMessage = "The Name field is required")]
         public string Name { get; set; }
-
-        public int Location { get; set; }
-
     }
 }

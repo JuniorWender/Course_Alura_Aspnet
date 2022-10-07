@@ -11,7 +11,7 @@ namespace MoviesAPI.Profiles
         {
             CreateMap<CreateLocationDto, Location>();
             CreateMap<Location, ReadLocationDto>();
-            CreateMap<UpdateLocationDto, Location>();
+            CreateMap<PutLocationDto, Location>();
         }
     }
 }
