@@ -14,7 +14,7 @@ namespace MoviesAPI.Models
         public int LocationFk { get; set; }
 
         public int ManegerFK { get; set; }
-        public Location Location { get; set; }
+        public virtual Location Location { get; set; }
         public int LocationId { get; set; }
     }
 }

@@ -18,5 +18,7 @@ namespace MoviesAPI.Data
         public DbSet<Cinema> Cinemas {get; set;}
 
         public DbSet<Location> Locations {get; set;}
+        
+        public DbSet<Manager> Managers {get; set;}
     }
 }

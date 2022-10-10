@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<MovieContext>(opts => opts.UseMySql(builder.Configuration.GetConnectionString("MovieConnection"), new MySqlServerVersion(new Version(8, 0))));
+builder.Services.AddDbContext<MovieContext>(opts => opts.UseLazyLoadingProxies().UseMySql(builder.Configuration.GetConnectionString("MovieConnection"), new MySqlServerVersion(new Version(8, 0))));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
