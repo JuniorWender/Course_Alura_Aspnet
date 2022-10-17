@@ -19,7 +19,7 @@ namespace MoviesAPI.Controllers
             _context = context;
             _mapper = mapper;
         }
-
+        [HttpPost]
         public IActionResult AddManager(CreateManagerDto managerDto)
         {
             Manager manager = _mapper.Map<Manager>(managerDto);
@@ -27,7 +27,7 @@ namespace MoviesAPI.Controllers
             _context.SaveChanges();
             return CreatedAtAction(nameof(GetManager), new { Id = manager.Id }, manager);
         }
-
+        [HttpGet("{id}")]
         public IActionResult GetManager(int id)
         {
             Manager manager = _context.Managers.FirstOrDefault(manager => manager.Id == id);

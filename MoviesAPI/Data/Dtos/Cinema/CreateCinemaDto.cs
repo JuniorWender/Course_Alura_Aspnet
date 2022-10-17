@@ -8,5 +8,6 @@ namespace MoviesAPI.Data.Dtos.Cinema
         [Required(ErrorMessage = "The Name field is required")]
         public string Name { get; set; }
         public int LocationId { get; set; }
+        public int ManagerId { get; set; }
     }
 }

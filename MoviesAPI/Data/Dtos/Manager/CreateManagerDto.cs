@@ -2,6 +2,6 @@
 {
     public class CreateManagerDto
     {
-        public string Nome { get; set; }
+        public string Name { get; set; }
     }
 }
