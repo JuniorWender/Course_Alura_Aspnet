@@ -10,6 +10,9 @@ namespace MoviesAPI.Profiles
         {
             CreateMap<CreateManagerDto, Manager>();
             CreateMap<Manager, ReadManagerDto>();
+               /* .ForMember(manager => manager.Cinemas, opts => opts
+                .MapFrom(manager => manager.Cinemas.Select
+                (cinema => new cinema == { c.Id, c.Location, c.LocationId })); */
         }
     }
 }
