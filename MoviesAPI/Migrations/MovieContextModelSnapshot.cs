@@ -47,7 +47,7 @@ namespace MoviesAPI.Migrations
 
                     b.HasIndex("ManagerId");
 
-                    b.ToTable("Cinemas");
+                    b.ToTable("Cinemas", (string)null);
                 });
 
             modelBuilder.Entity("MoviesAPI.Models.Location", b =>
@@ -69,7 +69,7 @@ namespace MoviesAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Locations");
+                    b.ToTable("Locations", (string)null);
                 });
 
             modelBuilder.Entity("MoviesAPI.Models.Manager", b =>
@@ -84,7 +84,7 @@ namespace MoviesAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Managers");
+                    b.ToTable("Managers", (string)null);
                 });
 
             modelBuilder.Entity("MoviesAPI.Models.Movie", b =>
@@ -111,7 +111,7 @@ namespace MoviesAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movies");
+                    b.ToTable("Movies", (string)null);
                 });
 
             modelBuilder.Entity("MoviesAPI.Models.Cinema", b =>
