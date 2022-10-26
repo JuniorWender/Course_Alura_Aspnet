@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using MoviesAPI.Models;
 
 namespace MoviesAPI.Data.Dtos.Cinema
 {

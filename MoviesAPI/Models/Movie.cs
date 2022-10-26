@@ -20,6 +20,6 @@ namespace MoviesAPI.Models
         [Range(1, 600,ErrorMessage = "The Duration Range invalid")]
         public int Duration { get; set; }
 
-        public virtual List<Cinema> Cinemas { get; set; }
+        public virtual List<Section> Sections { get; set; }
     }
 }

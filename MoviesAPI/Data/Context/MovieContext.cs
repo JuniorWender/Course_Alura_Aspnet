@@ -17,6 +17,18 @@ namespace MoviesAPI.Data
                 .HasOne(cinema => cinema.Manager)
                 .WithMany(manager => manager.Cinemas)
                 .HasForeignKey(cinema => cinema.ManagerId);
+
+            builder.Entity<Section>()
+                .HasOne(section => section.Movie)
+                .WithMany(movie => movie.Sections)
+                .HasForeignKey(section => section.MovieId);
+
+            builder.Entity<Section>()
+                .HasOne(section => section.Cinema)
+                .WithMany(cinema => cinema.Sections)
+                .HasForeignKey(section => section.CinemaId);
+            
+
         }
         public DbSet<Movie> Movies {get; set;}
 
@@ -25,5 +37,8 @@ namespace MoviesAPI.Data
         public DbSet<Location> Locations {get; set;}
         
         public DbSet<Manager> Managers {get; set;}
+
+        public DbSet<Section> Sections { get; set; }
+
     }
 }

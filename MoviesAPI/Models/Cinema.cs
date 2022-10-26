@@ -19,6 +19,6 @@ namespace MoviesAPI.Models
         public virtual Manager Manager { get; set; }
         public int ManagerId { get; set; }
 
-        public virtual List<Movie> Movies { get; set; }
+        public virtual List<Section> Sections { get; set; }
     }
 }
