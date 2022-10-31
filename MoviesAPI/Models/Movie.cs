@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace MoviesAPI.Models
 {
@@ -20,6 +21,9 @@ namespace MoviesAPI.Models
         [Range(1, 600,ErrorMessage = "The Duration Range invalid")]
         public int Duration { get; set; }
 
+        public int AgeRating { get; set; }
+
+        [JsonIgnore]
         public virtual List<Section> Sections { get; set; }
     }
 }

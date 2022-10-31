@@ -9,7 +9,9 @@ namespace MoviesAPI.Profiles
         public SectionProfile()
         {
             CreateMap<CreateSectionDto, Section>();
-            CreateMap<Section, ReadSectionDto>();
+            CreateMap<Section, ReadSectionDto>()
+                .ForMember(dto => dto.MovieStartHour, opts => opts
+                .MapFrom(dto => dto.MovieHour.AddMinutes(dto.Movie.Duration * (-1))));
         }
     }
 }
