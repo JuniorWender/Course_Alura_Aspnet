@@ -1,9 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MoviesAPI.Migrations.Dtos
+namespace MoviesAPI.Data.Dtos.Movie
 {
-    public class CreateMovieDto
+    public class ReadMovieDto
     {
+        [Key]
+        [Required]
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "The Title field is required")]
         public string Title { get; set; }
 
@@ -15,5 +19,7 @@ namespace MoviesAPI.Migrations.Dtos
 
         [Range(1, 600, ErrorMessage = "The Duration Range invalid")]
         public int Duration { get; set; }
+
+        public DateTime SearchHour { get; set; }
     }
 }
