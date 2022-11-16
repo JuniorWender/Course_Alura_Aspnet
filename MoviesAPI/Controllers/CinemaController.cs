@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MoviesAPI.Data;
 using MoviesAPI.Data.Dtos.Cinema;
 using MoviesAPI.Models;
+using MoviesAPI.Services;
 using System;
 
 namespace MoviesAPI.Controllers
@@ -11,29 +12,28 @@ namespace MoviesAPI.Controllers
     [Route("[controller]")]
     public class CinemaController : ControllerBase
     {
-        private MovieContext _context;
-        private IMapper _mapper;
-
-        public CinemaController(MovieContext context, IMapper mapper)
+        private CinemaService _cinemaService;
+        public CinemaController(CinemaService cinemaService)
         {
-            _context = context;
-            _mapper = mapper;
+            _cinemaService = cinemaService;
         }
 
 
         [HttpPost]
         public IActionResult AddCinema([FromBody] CreateCinemaDto cinemaDto)
         {
-            Cinema cinema = _mapper.Map<Cinema>(cinemaDto);
-            _context.Cinemas.Add(cinema);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(GetCinema), new { Id = cinema.Id }, cinema);
+            ReadCinemaDto readDto = _cinemaService.AddCinema(cinemaDto);
+            return CreatedAtAction(nameof(GetCinema), new { Id = readDto.Id }, readDto);
         }
 
         [HttpGet]
-        public IEnumerable<Cinema> GetAllCinemas([FromQuery] string movieName)
+        public IActionResult GetAllCinemas([FromQuery] string movieName)
         {
-            return _context.Cinemas;
+            List<ReadCinemaDto> readDto = _cinemaService.GetAllCinemas(movieName);
+
+            if (readDto != null) return Ok(readDto);
+
+            return NotFound();
         }
 
         [HttpGet("{id}")]

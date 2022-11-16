@@ -4,6 +4,7 @@ using System.IO;
 using MoviesAPI.Models;
 using AutoMapper;
 using MoviesAPI.Data.Dtos.Movie;
+using MoviesAPI.Services;
 
 namespace FilmesAPI.Controllers
 {
@@ -11,90 +12,59 @@ namespace FilmesAPI.Controllers
     [Route("[Controller]")]
     public class MovieController : ControllerBase
     {
-        private MovieContext _context;
-        private IMapper _mapper;
 
-        public MovieController(MovieContext context, IMapper mapper)
+        private MovieService _movieService;
+        public MovieController(MovieService movieService)
         {
-            _context = context;
-            _mapper = mapper;
+            _movieService = movieService;
         }
 
         [HttpPost] // Used for add a new data on RESTful application
         public IActionResult AddMovie([FromBody] CreateMovieDto movieDto)
         {
-            Movie movie = _mapper.Map<Movie>(movieDto);
+            ReadMovieDto readDto = _movieService.AddMovie(movieDto);
 
-            _context.Movies.Add(movie);
-            _context.SaveChanges(); // Confirme the changes on db
-            return CreatedAtAction(nameof(GetMovie), new { Id = movie.Id }, movie);
+            return CreatedAtAction(nameof(GetMovie), new { Id = readDto.Id }, readDto);
         }
 
         [HttpGet]
-        public IActionResult GetAllMovies([FromQuery] int? AgeClassification = null)
+        public IActionResult GetAllMovies([FromQuery] int? ageClassification = null)
         {
-            List<Movie> movie;
+            List<ReadMovieDto> readDto = _movieService.GetAllMovies(ageClassification);
 
-            if (AgeClassification == null)
-            {
-                movie = _context.Movies.ToList();
-            }
-            else
-            {
-                movie = _context.Movies.Where(movie => movie.AgeRating <= AgeClassification).ToList();
+            if (readDto != null) return Ok(readDto);
 
-            }
-
-            if(movie != null)
-            {
-                List<ReadMovieDto> readDto = _mapper.Map<List<ReadMovieDto>>(movie);
-
-                return Ok(readDto);
-            }
             return NotFound();
-
         }
 
         [HttpGet("{id}")]
         public IActionResult GetMovie(int id)
         {
-            Movie movie = _context.Movies.FirstOrDefault(x => x.Id == id);
+            ReadMovieDto readDto = _movieService.GetMovie(id);
 
-            if (movie != null)
-            { 
-               ReadMovieDto movieDto = _mapper.Map<ReadMovieDto>(movie);
+            if (readDto != null) return Ok(readDto);
 
-               return Ok(movieDto);
-            }
             return NotFound();
         }
 
         [HttpPut("{id}")]
-        public IActionResult PutMovie(int id, [FromBody] PutMovieDto movieDto)
+        public IActionResult PutMovie([FromBody] ReadMovieDto movieDto)
         {
-            Movie movie = _context.Movies.FirstOrDefault(x => x.Id == id);
+            ReadMovieDto readDto = _movieService.PutMovie(movieDto);
 
-            if (movie == null)
-            {
-                return NotFound();
-            }
-            _mapper.Map(movieDto, movie);
-            _context.SaveChanges();
-            return NoContent(); // Good Practice when you update a content is not return the content, but retun a 200 familly status code
+            if (readDto != null) return NoContent(); // Good Practice when you update a content is not return the content, but return a 200 familly status code
+
+            return NotFound();
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteMovie(int id)
         {
-            Movie movie = _context.Movies.FirstOrDefault(x => x.Id == id);
+            ReadMovieDto readDto = _movieService.DeleteMovie(id);
 
-            if (movie == null)
-            {
-                return NotFound();
-            }
-            _context.Movies.Remove(movie);
-            _context.SaveChanges();
-            return NoContent();
+            if (readDto != null) return NoContent();
+
+            return NotFound();
         }
     }
 }
